@@ -58,7 +58,6 @@ int main(void)
 	DListNode* next = (DListNode*)malloc(sizeof(DListNode));
 	init(next);
 
-	char c;
 	char s[100];
 
 	while (1) {
