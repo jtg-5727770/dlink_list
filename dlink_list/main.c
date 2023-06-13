@@ -70,60 +70,68 @@ int main(void)
 		printf("o) 과일 리스트 출력(현재 선택된 과일에는 마지막에[O] 출력)\n");
 		printf("e) 프로그램 종료\n");
 		printf("메뉴를 선택하세요: ");
-		scanf_s(" %c", &c);
-
-		switch (c) {
-		case 'n':
-			if (here->rlink == head) {
-				here = head->rlink;
+		char input[100];
+		scanf_s("%s", input, sizeof(input));
+		if (strlen(input) == 1) {
+			char c = input[0];
+			switch (c) {
+			case 'n':
+				if (here->rlink == head) {
+					here = head->rlink;
+				}
+				else {
+					here = here->rlink;
+				}
+				break;
+			case 'p':
+				if (here->llink == head) {
+					here = head->llink;
+				}
+				else {
+					here = here->llink;
+				}
+				break;
+			case 'd':
+				if (head->rlink == head) {
+					printf("리스트가 비어있습니다.\n");
+				}
+				else {
+					next = here->rlink;
+					ddelete(here->llink, here);
+					here = next;
+				}
+				break;
+			case 'i':
+				printf("추가할 과일을 입력하세요: ");
+				scanf_s("%s", s, sizeof(s));
+				if (head->rlink == head) {
+					dinsert(here, _strdup(s));
+					here = here->rlink;
+				}
+				else
+				{
+					dinsert(here, _strdup(s));
+				}
+				break;
+			case 'o':
+				if (here->llink == here) {
+					printf("리스트가 비어있습니다. \n");
+				}
+				print_dlist(head, here);
+				break;
+			case 'e':
+				printf("프로그램을 종료합니다,.\n");
+				exit(0);
+			default:
+				printf("다시 선택해주세요.\n");
+				while (getchar() != '\n');
 			}
-			else {
-				here = here->rlink;
-			}
-			break;
-		case 'p':
-			if (here->llink == head) {
-				here = head->llink;
-			}
-			else {
-				here = here->llink;
-			}
-			break;
-		case 'd':
-			if (head->rlink == head) {
-				printf("리스트가 비어있습니다.\n");
-			}
-			else {
-				next = here->rlink;
-				ddelete(here->llink, here);
-				here = next;
-			}
-			break;
-		case 'i':
-			printf("추가할 과일을 입력하세요: ");
-			scanf_s("%s", s, sizeof(s));
-			if (head->rlink == head) {
-				dinsert(here, _strdup(s));
-				here = here->rlink;
-			}
-			else
-			{
-				dinsert(here, _strdup(s));
-			}
-			break;
-		case 'o':
-			if (here->llink == here) {
-				printf("리스트가 비어있습니다. \n");
-			}
-			print_dlist(head, here);
-			break;
-		case 'e':
-			printf("프로그램을 종료합니다,.\n");
-			exit(0);
-		default:
-			printf("다시 선택해주세요.\n");
-			while (getchar() != '\n');
 		}
+		else {
+			printf("다시 선택해주세요.\n");
+		
+		}
+
 	}
 	system("pause");
 	return 0;
