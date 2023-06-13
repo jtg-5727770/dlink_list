@@ -58,7 +58,7 @@ int main(void)
 	DListNode* next = (DListNode*)malloc(sizeof(DListNode));
 	init(next);
 
-	char s[100];
+	
 
 	while (1) {
 		printf("=========메뉴=========\n");
@@ -69,6 +69,7 @@ int main(void)
 		printf("o) 과일 리스트 출력(현재 선택된 과일에는 마지막에[O] 출력)\n");
 		printf("e) 프로그램 종료\n");
 		printf("메뉴를 선택하세요: ");
+		char s[100];
 		char input[100];
 		scanf_s("%s", input, sizeof(input));
 		if (strlen(input) == 1) {
@@ -95,7 +96,12 @@ int main(void)
 					printf("리스트가 비어있습니다.\n");
 				}
 				else {
-					next = here->rlink;
+					if (here->rlink == head) {
+						next = head->rlink;
+					}
+					else {
+						next = here->rlink;
+					}
 					ddelete(here->llink, here);
 					here = next;
 				}
