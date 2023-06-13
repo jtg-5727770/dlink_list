@@ -119,10 +119,12 @@ int main(void)
 				}
 				break;
 			case 'o':
-				if (here->llink == here) {
+				if (head->llink == head) {
 					printf("리스트가 비어있습니다. \n");
 				}
-				print_dlist(head, here);
+				else {
+					print_dlist(head, here);
+				}
 				break;
 			case 'e':
 				printf("프로그램을 종료합니다,.\n");
